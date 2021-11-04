@@ -24,13 +24,21 @@ class Culture(models.Model):
     start_date = models.DateField()
     flowering_date = models.DateField(null=True, blank=True)
     harvest_date = models.DateField(null=True, blank=True)
-    harvest_weight = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    harvest_weight = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True
+    )
     drying_date = models.DateField(null=True, blank=True)
-    drying_weight = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    drying_weight = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True
+    )
     storage_date = models.DateField(null=True, blank=True)
     discarded = models.BooleanField(default=False)
     discard_reason = models.CharField(
-        'Discard Reason', max_length=4, choices=DiscardReasons.choices, null=True, blank=True
+        'Discard Reason',
+        max_length=4,
+        choices=DiscardReasons.choices,
+        null=True,
+        blank=True,
     )
 
     def __str__(self):

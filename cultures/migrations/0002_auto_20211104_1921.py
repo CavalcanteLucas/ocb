@@ -13,7 +13,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='culture',
             name='discard_reason',
-            field=models.CharField(blank=True, choices=[('male', 'Male'), ('pest', 'Pest')], max_length=4, null=True, verbose_name='Discard Reason'),
+            field=models.CharField(
+                blank=True,
+                choices=[('male', 'Male'), ('pest', 'Pest')],
+                max_length=4,
+                null=True,
+                verbose_name='Discard Reason',
+            ),
         ),
         migrations.AlterField(
             model_name='culture',
@@ -23,7 +29,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='culture',
             name='drying_weight',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=5, null=True),
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=5, null=True
+            ),
         ),
         migrations.AlterField(
             model_name='culture',
@@ -38,7 +46,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='culture',
             name='harvest_weight',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=5, null=True),
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=5, null=True
+            ),
         ),
         migrations.AlterField(
             model_name='culture',

@@ -7,25 +7,63 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='Culture',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('genetic_name', models.CharField(max_length=200, verbose_name='Genetic name')),
-                ('origin', models.CharField(choices=[('seed', 'Seed'), ('clone', 'Clone')], default='seed', max_length=20, verbose_name='Origin')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'genetic_name',
+                    models.CharField(
+                        max_length=200, verbose_name='Genetic name'
+                    ),
+                ),
+                (
+                    'origin',
+                    models.CharField(
+                        choices=[('seed', 'Seed'), ('clone', 'Clone')],
+                        default='seed',
+                        max_length=20,
+                        verbose_name='Origin',
+                    ),
+                ),
                 ('start_date', models.DateField()),
                 ('flowering_date', models.DateField(null=True)),
                 ('harvest_date', models.DateField(null=True)),
-                ('harvest_weight', models.DecimalField(decimal_places=2, max_digits=5, null=True)),
+                (
+                    'harvest_weight',
+                    models.DecimalField(
+                        decimal_places=2, max_digits=5, null=True
+                    ),
+                ),
                 ('drying_date', models.DateField(null=True)),
-                ('drying_weight', models.DecimalField(decimal_places=2, max_digits=5, null=True)),
+                (
+                    'drying_weight',
+                    models.DecimalField(
+                        decimal_places=2, max_digits=5, null=True
+                    ),
+                ),
                 ('storage_date', models.DateField(null=True)),
                 ('discarded', models.BooleanField(default=False)),
-                ('discard_reason', models.CharField(choices=[('male', 'Male'), ('pest', 'Pest')], max_length=4, null=True, verbose_name='Discard Reason')),
+                (
+                    'discard_reason',
+                    models.CharField(
+                        choices=[('male', 'Male'), ('pest', 'Pest')],
+                        max_length=4,
+                        null=True,
+                        verbose_name='Discard Reason',
+                    ),
+                ),
             ],
         ),
     ]

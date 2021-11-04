@@ -25,4 +25,4 @@ urlpatterns = [
 admin.site.unregister(User)
 admin.site.unregister(Group)
 
-admin.site.site_header = "Open Cannabis"
+admin.site.site_header = 'Open Cannabis'

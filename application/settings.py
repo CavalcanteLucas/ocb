@@ -16,16 +16,22 @@ from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
 
+
 def get_env_variable(var_name, fallback=None):
-    """ Get the environment variable or return exception """
+    """Get the environment variable or return exception"""
     try:
         return os.environ[var_name]
     except KeyError:
         if fallback is not None:
-            print('get_env_variable for variable {0} was not found so fallback {1} was used'.format(var_name, fallback))
+            print(
+                'get_env_variable for variable {0} was not found so fallback {1} was used'.format(
+                    var_name, fallback
+                )
+            )
             return fallback
-        error_msg = "Set the %s environment variable" % var_name
+        error_msg = 'Set the %s environment variable' % var_name
         raise ImproperlyConfigured(error_msg)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,7 +41,7 @@ print(BASE_DIR)
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_env_variable("DJANGO_SECRET_KEY")
+SECRET_KEY = get_env_variable('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,7 +83,9 @@ ROOT_URLCONF = 'application.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'application/templates'),],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'application/templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -149,14 +157,12 @@ USE_TZ = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
