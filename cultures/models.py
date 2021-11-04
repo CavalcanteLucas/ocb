@@ -48,6 +48,9 @@ class Culture(models.Model):
 
     def clean(self):
         if self.discard_reason is not None and not self.discarded:
+
+            # Ensure dates are filled in at the correct order
+
             raise ValidationError(
                 {
                     'discard_reason': ValidationError(
@@ -86,6 +89,68 @@ class Culture(models.Model):
                     'storage_date': ValidationError(
                         _(
                             'The sample must have a drying date before being storaged.'
+                        )
+                    )
+                }
+            )
+
+        # Ensure the chronological order of dates
+
+        if (
+            self.flowering_date
+            and self.start_date
+            and self.flowering_date <= self.start_date
+        ):
+            raise ValidationError(
+                {
+                    'flowering_date': ValidationError(
+                        _(
+                            'The flowering date must be later than the start date.'
+                        )
+                    )
+                }
+            )
+
+        if (
+            self.harvest_date
+            and self.flowering_date
+            and self.harvest_date <= self.flowering_date
+        ):
+            raise ValidationError(
+                {
+                    'harvest_date': ValidationError(
+                        _(
+                            'The harvest date must be later than the flowering date.'
+                        )
+                    )
+                }
+            )
+
+        if (
+            self.drying_date
+            and self.harvest_date
+            and self.drying_date <= self.harvest_date
+        ):
+            raise ValidationError(
+                {
+                    'harvest_date': ValidationError(
+                        _(
+                            'The drying date must be later than the harvest date.'
+                        )
+                    )
+                }
+            )
+
+        if (
+            self.storage_date
+            and self.drying_date
+            and self.storage_date <= self.drying_date
+        ):
+            raise ValidationError(
+                {
+                    'harvest_date': ValidationError(
+                        _(
+                            'The storage date must be later than the drying date.'
                         )
                     )
                 }
