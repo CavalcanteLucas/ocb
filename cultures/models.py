@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 class Culture(models.Model):
@@ -43,3 +45,48 @@ class Culture(models.Model):
 
     def __str__(self):
         return self.genetic_name
+
+    def clean(self):
+        if self.discard_reason is not None and not self.discarded:
+            raise ValidationError(
+                {
+                    'discard_reason': ValidationError(
+                        _(
+                            'Discard the sample before assigning a discard reason.'
+                        )
+                    )
+                }
+            )
+
+        if self.harvest_date is not None and self.flowering_date is None:
+            raise ValidationError(
+                {
+                    'harvest_date': ValidationError(
+                        _(
+                            'The sample must have a flowering date before being harvested.'
+                        )
+                    )
+                }
+            )
+
+        if self.drying_date is not None and self.harvest_date is None:
+            raise ValidationError(
+                {
+                    'drying_date': ValidationError(
+                        _(
+                            'The sample must have a harvest date before being dried.'
+                        )
+                    )
+                }
+            )
+
+        if self.storage_date is not None and self.drying_date is None:
+            raise ValidationError(
+                {
+                    'storage_date': ValidationError(
+                        _(
+                            'The sample must have a drying date before being storaged.'
+                        )
+                    )
+                }
+            )
