@@ -1,2 +1,3 @@
 .envrc
 staticfiles/
+*__pycache__/

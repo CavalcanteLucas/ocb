@@ -19,7 +19,7 @@ from django.contrib.auth.models import User, Group
 
 urlpatterns = [
     # path('cultures/', include('cultures.urls')),
-    path('', admin.site.urls),
+    path('admin/', admin.site.urls),
 ]
 
 admin.site.unregister(User)
