@@ -22,15 +22,16 @@ class Culture(models.Model):
         'Origin', max_length=20, choices=Origins.choices, default=Origins.SEED
     )
     start_date = models.DateField()
-    flowering_date = models.DateField(null=True)
-    harvest_date = models.DateField(null=True)
-    harvest_weight = models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    drying_date = models.DateField(null=True)
-    drying_weight = models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    storage_date = models.DateField(null=True)
+    flowering_date = models.DateField(null=True, blank=True)
+    harvest_date = models.DateField(null=True, blank=True)
+    harvest_weight = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    drying_date = models.DateField(null=True, blank=True)
+    drying_weight = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    storage_date = models.DateField(null=True, blank=True)
     discarded = models.BooleanField(default=False)
     discard_reason = models.CharField(
-        'Discard Reason', max_length=4, choices=DiscardReasons.choices, null=True
+        'Discard Reason', max_length=4, choices=DiscardReasons.choices, null=True, blank=True
     )
 
-
+    def __str__(self):
+        return self.genetic_name
